@@ -1,3 +1,19 @@
+# Usage
+
+```cs
+var client = new AirtableClient(Config.ApiKey);
+var @base = client.GetBase(Config.TestBaseID);
+var allRows = @base.LoadTableAsync<TestTable1>().Result;
+
+foreach (var row in allRows)
+{
+    Console.WriteLine(row.ToString());
+}
+```
+
+![AirtableClient](https://user-images.githubusercontent.com/1702680/60876727-6c1a9480-a277-11e9-851e-c7545e1657c0.jpg)
+
+
 # LICENSE
 
 ## neuecc/Utf8Json
