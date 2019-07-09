@@ -1,5 +1,3 @@
-# AirtableClient
-
 # LICENSE
 
 ## neuecc/Utf8Json
