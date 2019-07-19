@@ -18,13 +18,18 @@ namespace Airtable
             this.baseId = baseId;
         }
 
-        public async Task<T[]> LoadTableAsync<T>()
+        public Task<T[]> LoadTableAsync<T>()
+        {
+            return LoadTableAsync<T>(typeof(T).Name);
+        }
+
+        public async Task<T[]> LoadTableAsync<T>(string tableName)
         {
             var result = new List<T>();
             var offset = "0";
-            do
+            while (!string.IsNullOrWhiteSpace(offset))
             {
-                var url = $"https://api.airtable.com/v0/{baseId}/{typeof(T).Name}?api_key={client.ApiKey}&offset={offset}";
+                var url = $"https://api.airtable.com/v0/{baseId}/{tableName}?api_key={client.ApiKey}&offset={offset}";
                 var message = await client.Get(url);
 
                 if (message.StatusCode != HttpStatusCode.OK)
